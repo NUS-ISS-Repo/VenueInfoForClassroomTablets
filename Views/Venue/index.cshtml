@@ -1,0 +1,80 @@
+﻿@model ClassVenueInfo.Models.VenueModels
+
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="body3">
+    <div class="container" id="wrapper">
+
+        <div class="col-md-12">
+
+            <div class="col-md-4">
+                <a href="http://www.iss.nus.edu.sg" target="_blank"><img class="hidden-xs" style="padding-left: 0!important; float: left" alt="ISS" src="~/Images/nus-iss-logo.jpg"></a>
+                <a href="http://www.iss.nus.edu.sg" target="_blank"><img class="visible-xs" style="padding-left: 0!important; float: left" alt="ISS" src="~/Images/nus-iss-logo-mobile.jpg"></a>
+            </div>
+            <div class="col-md-8">&nbsp;</div>
+
+        </div>
+
+
+        <div class="col-md-12">&nbsp;</div>
+       
+        <div class="col-md-12"><b><font size="4" color="#084B8A">ISS Class Venue Information for @String.Format("{0:dddd, d MMM yyyy}", DateTime.Now) <object id="timer"></object></font></b></div>
+        <div class="col-md-12">&nbsp;</div>
+        <div class="col-md-12 body2 column">
+            <!--<div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="font-style: italic;">Registered classes</h3>
+                </div>
+            </div>-->
+            @using (@Html.BeginForm("Info", "VenueController"))
+            {
+                //Model.VenueModel = null;
+                //ActiveForm.SendKeys("{F11}");
+
+                if (Model.VenueModel != null && Model.VenueModel.Any())
+                {
+                    var grid = new WebGrid(Model.VenueModel, canPage: false, canSort: true, defaultSort: "ClassTime");
+
+
+
+                    @*<div id="gridContent">*@
+                    @grid.GetHtml(tableStyle: "table",
+                                headerStyle: "header2",
+                                alternatingRowStyle: "alt",
+                                columns: grid.Columns(
+                                 grid.Column("ClassTime", "Time"),
+                                 grid.Column("CourseDesc", "Event"),
+                                 grid.Column("RoomCode", "Venue")
+                                 ))
+                    @*</div>*@
+
+                }
+                else
+                {
+                    <div class="col-md-12 column">&nbsp;</div>
+                    <div class="col-md-12 column">&nbsp;</div>
+                    <div class="col-md-12 column">&nbsp;</div>
+                    <div class="col-md-12 column">&nbsp;</div>
+                    <div class="col-md-2 column">&nbsp;</div>
+                    <div class="col-md-8 column">
+                        <p style="font-size: 80px; color: #084B8A; text-align:center"><b>Sorry, we are unable to display this information. <br>Please try again later.</b></p>
+                    </div>
+                    <div class="col-md-2 column">&nbsp;</div>
+                }
+
+            }
+
+
+        </div>
+        <div class="col-md-12">&nbsp;</div>
+        <div class="col-md-12">&nbsp;</div>
+        <div class="col-md-12"><b><font size="2" color="#084B8A">Note: You can click on the headers to sort.</font></b></div>
+        <div class="col-md-12">&nbsp;</div>
+        <div class="col-md-12">&nbsp;</div>
+        <div class="col-md-12">&nbsp;</div>
+        <div class="col-md-12">&nbsp;</div>
+    </div>
+</div>
+

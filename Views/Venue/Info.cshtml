@@ -1,0 +1,173 @@
+﻿
+<body onload="loadImage()">
+
+
+    @model ClassVenueInfo.Models.VenueModels
+
+
+    @{
+        ViewBag.Title = "Info";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        var cnt = 0;
+        var pageNum = Request.Params["page"];
+        var pageVal = "1";
+        if (!pageNum.IsEmpty())
+        {
+            pageVal = pageNum;
+        }
+        var nRec = 100;
+        var nDispSec = "8";
+    }
+    @using (@Html.BeginForm("Info", "VenueController"))
+    {
+
+        if (Model.VenueModel != null && Model.VenueModel.Any())
+        {
+            <div class="col-md-12" style="padding-top:20px; padding-bottom:5px">
+                <div style="background-color:#004282; height:60px; color:white;padding-left:10px;padding-top:7px; font-weight:bold">
+                    <table style="width:100%">
+                        <tr>
+                            <td>
+                                @Html.Label(Model.VenueModel.First().RoomCode.ToString())
+
+                            </td>
+                            <td style="text-align:right; padding-right:20px">
+                                <font size="5" color="white">
+
+                                    @*<div style="color: white">@String.Format("{0:dddd, d MMM yyyy}", DateTime.Now) </div>*@
+
+                                    <span>@String.Format("{0:ddd, d MMM yyyy}", DateTime.Now)</span>
+                                    <span id="txt" ></span>
+
+
+                                    
+                                </font>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div>
+
+            </div>
+        }
+    }
+
+
+    <div class="col-md-12">
+
+        @using (@Html.BeginForm("Info", "VenueController"))
+        {
+            //Model.VenueModel = null;
+            //ActiveForm.SendKeys("{F11}");
+
+
+
+            if (Model.VenueModel != null && Model.VenueModel.Any())
+            {
+                var grid = new WebGrid(Model.VenueModel, canPage: true, canSort: false, defaultSort: "Status", rowsPerPage: nRec);
+
+                cnt = Model.VenueModel.Count();
+
+                @grid.GetHtml(tableStyle: "table",
+                headerStyle: "header",
+                alternatingRowStyle: "alt",
+                columns: grid.Columns(
+                 grid.Column("ClassTime", "Time", style: "time"),
+                 grid.Column("CourseDesc", "Event(s)", style: "event")
+                // grid.Column("RoomCode", "Venue", style: "venue")
+                 ))
+
+            }
+            else
+            {
+                <div class="col-md-12 column"><img src="~/Images/accent.png" alt="ISS" style="width:100%;height:100%;"></div>
+            }
+
+        }
+
+        @*@{ if (cnt > nRec && (pageVal.IsEmpty() || pageVal.Equals("1")))
+                {
+                    <div class="col-md-12 column"><img src="~/Images/accent.png" alt="ISS" style="width:100%;height:100%;"></div>
+                }
+                else if ((cnt > 0 && cnt <= (nRec * 2)) && pageVal.Equals("2"))
+                {
+                    <div class="col-md-12 column"><img src="~/Images/accent.png" alt="ISS" style="width:100%;height:100%;"></div>
+                }
+                else if (cnt > (nRec * 2) && pageVal.Equals("2"))
+                {
+                    <div class="col-md-12 column"><img src="~/Images/accent.png" alt="ISS" style="width:100%;height:100%;"></div>
+                }
+                else if (cnt > (nRec * 2) && pageVal.Equals("3"))
+                {
+                    <div class="col-md-12 column"><img src="~/Images/accent.png" alt="ISS" style="width:100%;height:100%;"></div>
+                }
+                else if (cnt > 0 && cnt <= nRec)
+                {
+                    <div class="col-md-12 column"><img src="~/Images/accent.png" alt="ISS" style="width:100%;height:100%;"></div>
+                }
+
+            }*@
+        @section scripts{
+            <script language="javascript">
+                function startTime() {
+                    var today = new Date();
+                    var h = today.getHours();
+                    var m = today.getMinutes();
+                    var s = today.getSeconds();
+                    m = checkTime(m);
+                    s = checkTime(s);
+                    document.getElementById('txt').innerHTML =
+                        h + ":" + m + ":" + s;
+                   
+                    var t = setTimeout(startTime, 1000);
+                }
+                function checkTime(i) {
+                    if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+                    return i;
+                }
+
+                function loadImage() {
+                    alert("Image is loaded");
+                }
+                
+              
+                function addLoadEvent(func) {
+                    var oldonload = window.onload;
+                    if (typeof window.onload != 'function') {
+                        window.onload = func;
+                    } else {
+                        window.onload = function () {
+                            if (oldonload) {
+                                oldonload();
+                            }
+                            func();
+                        }
+                    }
+                }
+
+                addLoadEvent(function () {
+                    document.getElementById('lbltipAddedComment').innerHTML = 'your tip has been submitted!';
+
+                });  
+
+                window.tdiff = []; fred = function (a, b) { return a - b; };
+                window.document.onload = function (e) {
+                    alert("test1")
+                }
+                window.onload = function (e) {
+                   // document.getElementById('lbltipAddedComment').innerHTML = startTime();
+                    startTime();
+                }
+
+            </script>
+        }
+    </div>
+</body>
+
+
+
+

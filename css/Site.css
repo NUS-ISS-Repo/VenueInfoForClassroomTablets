@@ -1,0 +1,136 @@
+﻿/*----------------------------------------------------------
+The base color for this template is #5c87b2. If you'd like
+to use a different color start by replacing all instances of
+#5c87b2 with your new color.
+----------------------------------------------------------*/
+/* WebGrid Styles */
+
+.gridtable
+{
+    width:100%;
+}
+
+.gridtable thead, 
+.gridtable thead a:link, 
+.gridtable thead a:hover, 
+.gridtable thead a:visited, 
+.gridtable header
+{
+    color: #FFFFFF;
+    text-align:center;
+}
+
+.gridtable tfoot, 
+.gridtable tfoot a:link, 
+.gridtable tfoot a:hover, 
+.gridtable tfoot a:visited
+{
+    text-align:center;
+    background-color: #EFEFEF;
+    background: url('/Content/images/toolbar.jpg');
+    color:white;
+}
+
+.gridtable-header
+{
+    background: url('/Content/images/toolbar.jpg');
+}
+
+.gridtable-alt
+{
+    background-color: #EFEFEF;
+}
+
+.gridtable th
+{ 
+    border: 1px solid #C0C0C0; 
+    padding: 5px; 
+    background: url('/Content/images/toolbar.jpg');
+}
+  .webgrid-table
+    {
+        font-family: sans-serif;/*"Trebuchet MS" , Arial, Helvetica, sans-serif;*/
+        font-size: 1.2em;
+        width: 100%;
+        display: table;
+        border-collapse: separate;
+        border: solid 1px #000000;
+        background-color: white;
+    }
+    .webgrid-table td, th
+    {
+        border: 1px solid #000000;
+        padding: 3px 7px 2px;
+    }
+
+     .webgrid-header
+    {
+        background-color: #337ab7;
+        color: #FFFFFF;
+        padding-bottom: 4px;
+        padding-top: 5px;
+        text-align: left;
+    }  
+     
+    .webgrid-table thead, 
+    .webgrid-table thead a:link, 
+    .webgrid-table thead a:hover, 
+    .webgrid-table thead a:visited, 
+    .webgrid-table header
+    {
+        color: #FFFFFF;
+        text-align:center;
+    } 
+
+    .webgrid-footer
+    {
+    }
+    .webgrid-row-style
+    {
+        padding: 3px 7px 2px;
+    }
+    .webgrid-alternating-row
+    {
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+
+  
+    /* CSS used here will be applied after bootstrap.css */
+.btn.disabled.active {
+    box-shadow: inset 0 3px 5px rgba(0,0,0,350);
+}
+
+
+/* login
+----------------------------------------------------------*/
+#login {
+    display: block;
+    font-size: .85em;
+    margin: 0 0 10px;
+    text-align: right;
+}
+
+    #login a {
+        background-color: #d3dce0;
+        margin-left: 10px;
+        margin-right: 3px;
+        padding: 2px 3px;
+        text-decoration: none;
+    }
+
+    #login a.username {
+        background: none;
+        margin: 0;
+        padding: 0;
+        text-decoration: underline;
+    }
+
+    #login ul {
+        margin: 0;
+    }
+
+    #login li {
+        display: inline;
+        list-style: none;
+    }

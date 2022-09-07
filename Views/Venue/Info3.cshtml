@@ -1,0 +1,75 @@
+﻿@model ClassVenueInfo.Models.VenueModels
+
+@{
+    ViewBag.Title = "Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cnt = 0;
+    var pageNum = Request.Params["page"];
+    var pageVal = "1";
+    if (!pageNum.IsEmpty())
+    {
+        pageVal = pageNum;
+    }
+    var nRec = 5;
+    //var nDispSec = "8";
+}
+
+
+<div class="col-md-12">
+
+    @using (@Html.BeginForm("Info3", "VenueController"))
+    {
+        //Model.VenueModel = null;
+        //ActiveForm.SendKeys("{F11}");
+
+        if (Model.VenueModel != null && Model.VenueModel.Any())
+        {
+            var grid = new WebGrid(Model.VenueModel, canPage: true, canSort: false, defaultSort: "Status", rowsPerPage: nRec);
+
+            cnt = Model.VenueModel.Count();
+
+            @grid.GetHtml(tableStyle: "table",
+                            headerStyle: "header",
+                            alternatingRowStyle: "alt",
+                            columns: grid.Columns(
+                             grid.Column("ClassTime", "Time", style: "time"),
+                             grid.Column("CourseDesc", "Event", style: "event"),
+                             grid.Column("RoomCode", "Venue", style: "venue")
+                             ))
+
+        }
+        else
+        {
+            <div class="col-md-12 column">&nbsp;</div>
+            <div class="col-md-12 column"><img src="~/Images/ISS-figures 151211.jpg" alt="ISS" style="width:100%;height:680px;"></div>
+            @*<div class="col-md-12 column">&nbsp;</div>
+            <div class="col-md-12 column">&nbsp;</div>
+            <div class="col-md-12 column">&nbsp;</div>
+            <div class="col-md-2 column">&nbsp;</div>
+            <div class="col-md-8 column">
+                <p style="font-size: 80px; color: #084B8A; text-align:center"><b>Welcome to <br />Institute of Systems Science</b></p>
+            </div>*@
+            <div class="col-md-2 column">&nbsp;</div>
+        }
+
+    }
+
+    @{ if (cnt > nRec && (pageVal.IsEmpty() || pageVal.Equals("1")))
+     {
+         Response.AddHeader("REFRESH", 10 + ";URL=Info3?page=2");
+     }
+     else if (cnt > (nRec * 2) && pageVal.Equals("2"))
+     {
+         Response.AddHeader("REFRESH", 10 + ";URL=Info3?page=3");
+     }
+     else if (cnt > 0 && cnt <= nRec)
+     {
+         Response.AddHeader("REFRESH", "300;URL=Info3?page=1");
+     }
+
+    }
+</div>
+
+
+
+
